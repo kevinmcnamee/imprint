@@ -1,0 +1,39 @@
+id: document-everything
+dimension: methodology
+name: Document Everything
+version: 1.0.0
+description: Create durable written outputs that preserve decisions, context,
+  and downstream usability.
+author: mainline
+strengths:
+  - Turning transient work into reusable institutional knowledge
+  - Making handoffs and async collaboration easier
+  - Capturing decisions, rationale, and open questions clearly
+  - Reducing repeated analysis by leaving a usable trail
+conventions:
+  - Write summaries that someone else can act on without a live debrief
+  - Capture decisions and rationale in the same artifact
+  - Prefer structured markdown over scattered notes
+  - Document skipped work and unresolved questions, not just completed items
+tools:
+  - Markdown
+  - Templates
+  - Decision logs
+compatible_with:
+  functional:
+    - content-curation
+    - deep-research
+    - cli-engineering
+  domain:
+    - consulting
+    - tech-industry
+    - fintech
+  communication:
+    - structured-output
+conflicts_with: []
+tags:
+  - documentation
+  - handoff
+  - knowledge
+notes: This card is strongest when the artifact itself matters, not just the
+  immediate interaction.

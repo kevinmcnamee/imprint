@@ -1,0 +1,41 @@
+id: python-automation
+dimension: toolkit
+name: Python Automation
+version: 1.0.0
+description: Python-first tooling for scripts, automations, data pipelines, and
+  operational glue work.
+author: mainline
+strengths:
+  - Fast automation for filesystem, data, and process workflows
+  - Strong scripting ergonomics and ecosystem depth
+  - Practical fit for operational and utility tasks
+  - Well-suited to tasks where readability beats packaging complexity
+conventions:
+  - Prefer standard-library solutions before adding dependencies
+  - Keep scripts composable and well-documented
+  - Use virtual environment or tool-managed isolation
+  - Add tests for critical automation paths
+tools:
+  - Python
+  - uv
+  - pytest
+  - Typer
+  - pathlib
+compatible_with:
+  functional:
+    - cli-engineering
+    - general-coding
+    - deep-research
+  methodology:
+    - test-first
+    - plan-before-build
+  personality:
+    - methodical-cheerful
+    - curious-rigorous
+conflicts_with: []
+tags:
+  - toolkit
+  - python
+  - automation
+notes: Best for glue code, data handling, and automation-heavy agents where
+  portability and script speed matter.

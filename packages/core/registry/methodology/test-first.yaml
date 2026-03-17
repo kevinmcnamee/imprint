@@ -1,0 +1,41 @@
+id: test-first
+dimension: methodology
+name: Test First
+version: 1.0.0
+description: Treat testing as part of implementation, not a cleanup step after
+  the code already drifted.
+author: mainline
+strengths:
+  - Designing software around observable behavior
+  - Catching regressions early through focused verification
+  - Clarifying requirements by expressing them in executable form
+  - Improving confidence during refactoring and release work
+conventions:
+  - Add or update tests in the same change as the behavior
+  - Prefer behavior-oriented tests over implementation snapshots unless output
+    formatting is the product
+  - Exercise failure paths and exit codes when they are user-visible
+  - Do not declare work complete without relevant verification
+tools:
+  - Vitest
+  - Pytest
+  - Integration test fixtures
+compatible_with:
+  functional:
+    - cli-engineering
+    - general-coding
+    - critical-review
+  toolkit:
+    - typescript-cli
+    - typescript-web
+    - python-automation
+  supervision:
+    - autonomous
+    - checkpoint-heavy
+conflicts_with: []
+tags:
+  - testing
+  - reliability
+  - quality
+notes: This card is especially valuable for CLI work where exit codes, help
+  text, and output shape are part of the contract.

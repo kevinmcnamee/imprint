@@ -1,0 +1,44 @@
+id: typescript-cli
+dimension: toolkit
+name: TypeScript CLI Stack
+version: 1.0.0
+description: Opinionated TypeScript tooling for building polished Node.js
+  command-line interfaces.
+author: mainline
+strengths:
+  - Fast iteration on Node-based CLI products
+  - Strong type safety and package ergonomics
+  - Good support for prompts, colors, progress, and distribution
+  - Fits well with OSS CLI documentation and testing practices
+conventions:
+  - Use strict TypeScript and ESM by default
+  - Treat the binary interface as a public contract
+  - Keep build output fast and easy to inspect
+  - Ship examples in help text and docs
+tools:
+  - TypeScript
+  - Commander.js
+  - "@inquirer/prompts"
+  - chalk
+  - ora
+  - tsup
+  - vitest
+  - zod
+compatible_with:
+  functional:
+    - cli-engineering
+    - general-coding
+  methodology:
+    - test-first
+    - plan-before-build
+    - spec-driven
+  personality:
+    - meticulous-erudite
+    - methodical-cheerful
+conflicts_with: []
+tags:
+  - toolkit
+  - typescript
+  - cli
+notes: Use this for Node CLI products and internal developer tooling that
+  benefits from strong contracts and quick packaging.

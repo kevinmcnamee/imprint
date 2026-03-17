@@ -1,0 +1,40 @@
+id: typescript-web
+dimension: toolkit
+name: TypeScript Web Stack
+version: 1.0.0
+description: Modern TypeScript web application tooling for product interfaces
+  and server-backed apps.
+author: mainline
+strengths:
+  - Type-safe frontend and backend application work
+  - Strong fit for component-driven product interfaces
+  - Good ecosystem for design systems and full-stack apps
+  - Supports rapid iteration with maintainable codebases
+conventions:
+  - Preserve established UI patterns when working inside an existing product
+  - Prefer accessible, responsive components and explicit state flows
+  - Keep server and client boundaries intentional
+  - Test user-visible behavior, not implementation accidents
+tools:
+  - TypeScript
+  - React
+  - Next.js
+  - Tailwind CSS
+  - Vitest
+compatible_with:
+  functional:
+    - general-coding
+  methodology:
+    - test-first
+    - spec-driven
+    - plan-before-build
+  personality:
+    - methodical-cheerful
+    - direct-experienced
+conflicts_with: []
+tags:
+  - toolkit
+  - typescript
+  - web
+notes: Useful for agents operating in application codebases where frontend
+  quality and typed server logic both matter.

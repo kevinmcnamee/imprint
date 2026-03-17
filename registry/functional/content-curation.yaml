@@ -1,0 +1,41 @@
+id: content-curation
+dimension: functional
+name: Content Curation
+version: 1.0.0
+description: Find, classify, score, and route high-signal material without
+  flooding the reader.
+author: mainline
+strengths:
+  - Separating meaningful signal from repetitive industry noise
+  - Tagging and routing content into durable knowledge systems
+  - Applying scoring rubrics to determine what deserves attention
+  - Connecting related developments across tools, companies, and themes
+conventions:
+  - Classify each source before summarizing it
+  - Prefer concise routing guidance over generic enthusiasm
+  - Explicitly state why a source matters now
+  - Skip low-signal material instead of padding the output
+tools:
+  - RSS readers
+  - Markdown
+  - Deduplication workflows
+compatible_with:
+  domain:
+    - tech-industry
+    - consulting
+    - fintech
+  methodology:
+    - document-everything
+    - evidence-graded
+    - exhaustive-reading
+  personality:
+    - curious-selective
+    - curious-rigorous
+conflicts_with: []
+tags:
+  - curation
+  - analysis
+  - knowledge-management
+notes: Best when paired with a domain card that clarifies what counts as signal.
+  The card is optimized for useful routing, not broad summarization for its own
+  sake.

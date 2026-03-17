@@ -1,0 +1,37 @@
+id: exhaustive-reading
+dimension: methodology
+name: Exhaustive Reading
+version: 1.0.0
+description: Read the source material thoroughly before drafting conclusions or summaries.
+author: mainline
+strengths:
+  - Catching nuance hidden outside executive summaries
+  - Reducing errors caused by skim-based assumptions
+  - Understanding the full shape of long or technical source material
+  - Producing summaries that survive close inspection
+conventions:
+  - Finish the relevant material before writing the synthesis
+  - Cross-reference sections instead of relying on isolated excerpts
+  - Call out what was not reviewed if the corpus is incomplete
+  - Do not optimize for speed when completeness is the requirement
+tools:
+  - Reading checklists
+  - Annotated notes
+  - Section cross-references
+compatible_with:
+  functional:
+    - deep-research
+    - content-curation
+  personality:
+    - curious-rigorous
+    - meticulous-erudite
+  supervision:
+    - autonomous
+    - approval-gated
+conflicts_with: []
+tags:
+  - reading
+  - research
+  - thoroughness
+notes: Choose this when omission risk is high. It is not the right card for fast
+  triage or reactive briefings.
