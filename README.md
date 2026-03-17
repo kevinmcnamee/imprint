@@ -1,31 +1,25 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
-# Agent Composer
+# Imprint
 
-Compose durable `AGENT.md` files from modular trait cards instead of rewriting agent identities from scratch.
+_Every agent needs an imprint._
 
-Agent Composer is a library-first system for building agent identities with three layers:
+Imprint is an open-source composition system for building durable `AGENT.md` files from reusable trait cards instead of rewriting agent instructions from scratch. It combines a shared base layer, a curated trait registry, and an identity layer so teams can generate consistent agent specs, inspect the cards behind them, validate generated output, and extend the registry with their own traits.
 
-1. Base layer: shared conventions every agent inherits automatically.
-2. Trait layer: composable behavior across seven dimensions.
-3. Identity layer: name, character, quotes, and flavor applied last.
-
-The result is a reusable engine, a CLI for building and inspecting agents, and a registry format that others can extend.
+Project site: [imprint.getmainline.ai](https://imprint.getmainline.ai)
 
 ## Quick Start
 
 ```bash
-npx agent-composer build
+npx imprint build
 ```
 
-1. Choose one or more trait cards across the seven dimensions.
-2. Enter the identity details for the agent you want to generate.
-3. Save the generated `AGENT.md` and validate it with `composer validate`.
+The interactive wizard loads the built-in registry, walks through trait selection across all seven dimensions, and writes a composed `AGENT.md`.
 
-You can also export a composition non-interactively:
+You can also export non-interactively:
 
 ```bash
-npx agent-composer export \
+npx imprint export \
   --trait cli-engineering \
   --trait test-first \
   --trait plan-before-build \
@@ -37,96 +31,48 @@ npx agent-composer export \
   --summary "CLI engineering specialist"
 ```
 
-## Why Composable Identities Matter
-
-Most agent identity files collapse three different concerns into one document:
-
-- Shared rules every agent should inherit.
-- Reusable behavioral traits that many agents share.
-- Persona-specific flavor and naming.
-
-That makes reuse hard and drift inevitable. Agent Composer separates those concerns so teams can:
-
-- Recompose known agents from a small number of tested traits.
-- Build new agents without starting from a blank file.
-- Apply consistent standards across many agents.
-- Review trait cards independently from character flavor.
-
-This repository ships Phase 1 of that model: a strict TypeScript engine, a public trait registry, and a CLI for composition, browsing, export, and validation.
-
-## Architecture
-
-```text
-                      +----------------------+
-                      |   Identity Layer     |
-                      | name, persona, quote |
-                      +----------+-----------+
-                                 |
-                      +----------v-----------+
-                      |     Trait Layer      |
-                      | 7 composable dims    |
-                      +----------+-----------+
-                                 |
-                      +----------v-----------+
-                      |     Base Layer       |
-                      | shared conventions   |
-                      +----------------------+
-```
-
-Repository layout:
-
-```text
-.
-├── packages/
-│   ├── core/          # @mainline/composer library
-│   └── cli/           # agent-composer binary
-├── registry/          # built-in YAML trait cards
-├── scripts/           # registry generation and maintenance helpers
-└── README.md
-```
-
 ## Command Reference
 
-### `composer build`
+### `imprint build`
 
-Interactive wizard for composing an `AGENT.md`.
+Interactive composition wizard for generating `AGENT.md`.
 
 ```bash
-composer build --out ./AGENT.md
+imprint build --out ./AGENT.md
 ```
 
-### `composer browse`
+### `imprint browse`
 
-Browse the active registry with optional filters.
+Browse the registry by dimension, text query, or tags.
 
 ```bash
-composer browse
-composer browse --dimension methodology
-composer browse --search research --tag evidence
+imprint browse
+imprint browse --dimension methodology
+imprint browse --search research --tag evidence
 ```
 
-### `composer inspect <trait-id>`
+### `imprint inspect <trait-id>`
 
-Inspect a full trait card.
+Inspect a single trait card as YAML.
 
 ```bash
-composer inspect cli-engineering
+imprint inspect cli-engineering
 ```
 
-### `composer validate <path>`
+### `imprint validate <path>`
 
-Validate an `AGENT.md` for required sections and known trait ids.
+Validate a generated agent file against Imprint conventions and known trait ids.
 
 ```bash
-composer validate ./AGENT.md
+imprint validate ./AGENT.md
 ```
 
-### `composer export`
+### `imprint export`
 
-Export a composition as markdown, JSON, or YAML.
+Export a composed identity as markdown, JSON, or YAML.
 
 ```bash
-composer export \
+imprint export \
   --trait deep-research \
   --trait evidence-graded \
   --trait curious-rigorous \
@@ -137,59 +83,29 @@ composer export \
   --format yaml
 ```
 
-### `composer registry list|add|remove`
+### `imprint registry list|add|remove`
 
-Manage additional local trait registries.
+Manage local registry directories alongside the built-in trait set.
 
 ```bash
-composer registry list
-composer registry add ./my-traits
-composer registry remove ./my-traits
+imprint registry list
+imprint registry add ./my-traits
+imprint registry remove ./my-traits
 ```
 
-## Programmatic API
+## Three-Layer Model
 
-The core package is designed to be embedded in other tools.
+Imprint composes agents in three layers:
 
-```ts
-import {
-  composeTraits,
-  loadRegistry,
-  RegistryManager,
-  renderAgentMarkdown
-} from "@mainline/composer";
+1. Base layer: shared operating rules every generated agent inherits.
+2. Trait layer: reusable behavior selected across functional, domain, methodology, personality, communication, supervision, and toolkit dimensions.
+3. Identity layer: agent-specific name, summary, character, quotes, and presentation details.
 
-const registry = await loadRegistry([
-  { id: "builtin", kind: "builtin", path: "./registry" }
-]);
-
-const manager = new RegistryManager(registry);
-const traits = manager.browse({ dimension: "functional" });
-
-const result = composeTraits({
-  registry,
-  traitIds: [
-    "cli-engineering",
-    "test-first",
-    "plan-before-build",
-    "meticulous-erudite",
-    "structured-output",
-    "autonomous",
-    "typescript-cli"
-  ],
-  identity: {
-    agentName: "Bob",
-    summary: "CLI engineering specialist",
-    quotes: ["Build something worthy of the terminal."]
-  }
-});
-
-console.log(renderAgentMarkdown(result));
-```
+This split keeps durable conventions separate from reusable behavioral cards and persona-specific flavor, which makes agents easier to audit, reuse, and evolve.
 
 ## Trait Card Format
 
-Trait cards are YAML files stored by dimension under `registry/`.
+Trait cards are YAML documents stored under `registry/<dimension>/`.
 
 ```yaml
 id: cli-engineering
@@ -209,7 +125,7 @@ conventions:
 
 tools:
   - Commander.js
-  - @inquirer/prompts
+  - "@inquirer/prompts"
   - chalk
 
 compatible_with:
@@ -225,111 +141,49 @@ tags:
   - developer-tools
   - terminal
   - cli
+
+notes: Treat terminal UX as product design.
 ```
 
-Fields:
+Field summary:
 
-- `id`: stable slug used for composition and references.
-- `dimension`: one of `functional`, `domain`, `methodology`, `personality`, `communication`, `supervision`, `toolkit`.
-- `strengths`: capabilities contributed by the card.
-- `conventions`: behavioral instructions merged into the output.
-- `tools`: framework or tooling preferences.
-- `compatible_with`: preferred pairings by dimension.
-- `conflicts_with`: hard or soft conflicts with other trait ids.
-- `notes`: optional author guidance used in generated output.
-
-## Composition Rules
-
-The engine applies these rules during composition:
-
-- Strengths merge by union and deduplication.
-- Conventions merge by union and deduplication.
-- Tools merge by union and deduplication.
-- Hard conflicts block composition.
-- Soft conflicts are surfaced as warnings.
-- Dimension limits are enforced and reported.
-
-Default limits:
-
-- Functional: 1 required, 2 maximum, 1 recommended.
-- Domain: 0 to 2.
-- Methodology: 1 to 4, 3 recommended.
-- Personality: exactly 1.
-- Communication: exactly 1.
-- Supervision: exactly 1.
-- Toolkit: 0 to 2.
+- `id` is the stable slug used by the CLI and composition engine.
+- `dimension` must be one of `functional`, `domain`, `methodology`, `personality`, `communication`, `supervision`, or `toolkit`.
+- `strengths`, `conventions`, and `tools` contribute merged output to the composed agent.
+- `compatible_with` expresses preferred pairings by dimension.
+- `conflicts_with` captures hard or soft incompatibilities.
+- `tags` support registry browsing and filtering.
+- `notes` are optional author guidance included in generated markdown.
 
 ## Built-In Traits
 
-The built-in registry ships with 28 seed cards across 7 dimensions.
+Imprint ships with 28 built-in traits across 7 dimensions:
 
-### Functional
+- Communication: 2
+- Domain: 3
+- Functional: 5
+- Methodology: 7
+- Personality: 5
+- Supervision: 3
+- Toolkit: 3
 
-- `cli-engineering`
-- `general-coding`
-- `content-curation`
-- `deep-research`
-- `critical-review`
+The seed registry focuses on practical, behaviorally concrete cards such as `cli-engineering`, `critical-review`, `test-first`, `plan-before-build`, `structured-output`, and `autonomous`.
 
-### Domain
+## Packages
 
-- `tech-industry`
-- `fintech`
-- `consulting`
-
-### Methodology
-
-- `test-first`
-- `plan-before-build`
-- `evidence-graded`
-- `exhaustive-reading`
-- `document-everything`
-- `spec-driven`
-- `concrete-alternatives`
-
-### Personality
-
-- `meticulous-erudite`
-- `methodical-cheerful`
-- `curious-selective`
-- `curious-rigorous`
-- `direct-experienced`
-
-### Communication
-
-- `structured-output`
-- `terse-updates`
-
-### Supervision
-
-- `autonomous`
-- `checkpoint-heavy`
-- `approval-gated`
-
-### Toolkit
-
-- `typescript-cli`
-- `typescript-web`
-- `python-automation`
-
-## Validation
-
-Generated `AGENT.md` files include a metadata block so the validator can verify:
-
-- Required sections exist.
-- Known trait ids resolve against the active registry.
-- The file still looks like a composer-generated agent document.
-
-If metadata is absent, the validator falls back to section-level heuristics and reports that limitation.
+```text
+.
+├── packages/
+│   ├── core/   # @imprint/core
+│   └── cli/    # imprint
+├── registry/   # canonical built-in trait source
+├── scripts/    # registry generation and release helpers
+└── README.md
+```
 
 ## Contributing
 
-Contribution guidance lives in [CONTRIBUTING.md](./CONTRIBUTING.md). In short:
-
-- keep the public API documented,
-- add tests with behavior changes,
-- make trait cards concrete and reusable,
-- avoid private infrastructure assumptions in docs or code.
+Contribution guidelines live in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## License
 
