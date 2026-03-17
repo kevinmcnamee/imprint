@@ -16,10 +16,11 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "registry"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --config ../../tsup.config.ts --banner.js '#!/usr/bin/env node'",
+    "build": "tsup src/index.ts --config ../../tsup.config.ts",
     "typecheck": "tsc --noEmit -p ../../tsconfig.json"
   },
   "dependencies": {

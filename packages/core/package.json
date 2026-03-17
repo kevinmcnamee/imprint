@@ -13,7 +13,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "registry"
   ],
   "scripts": {
     "build": "tsup src/index.ts --config ../../tsup.config.ts",
