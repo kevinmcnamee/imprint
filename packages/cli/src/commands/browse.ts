@@ -1,6 +1,6 @@
 import { Command } from "commander";
 
-import type { TraitCard, TraitDimension } from "@mainline/composer";
+import type { TraitCard, TraitDimension } from "@imprint/core";
 
 import { browseRegistry } from "../utils/registry.js";
 
@@ -44,9 +44,9 @@ export function createBrowseCommand(): Command {
     "after",
     `
 Examples:
-  composer browse
-  composer browse --dimension methodology
-  composer browse --search research --tag evidence
+  imprint browse
+  imprint browse --dimension methodology
+  imprint browse --search research --tag evidence
 `
   );
 

@@ -1,5 +1,5 @@
 import { checkbox, input, select } from "@inquirer/prompts";
-import type { IdentityLayer, RegistryData, TraitCard, TraitDimension } from "@mainline/composer";
+import type { IdentityLayer, RegistryData, TraitCard, TraitDimension } from "@imprint/core";
 
 const dimensions: readonly TraitDimension[] = [
   "functional",

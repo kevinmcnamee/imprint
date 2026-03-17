@@ -1,7 +1,7 @@
 {
-  "name": "@mainline/composer",
+  "name": "@imprint/core",
   "version": "0.1.0",
-  "description": "Core composition engine for Agent Composer.",
+  "description": "Core composition engine for Imprint.",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

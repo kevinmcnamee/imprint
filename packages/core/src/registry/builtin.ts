@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -6,5 +7,17 @@ import { fileURLToPath } from "node:url";
  */
 export function resolveBuiltinRegistryPath(): string {
   const moduleDirectory = path.dirname(fileURLToPath(import.meta.url));
-  return path.resolve(moduleDirectory, "../../../../registry");
+  const candidates = [
+    path.resolve(moduleDirectory, "../registry"),
+    path.resolve(moduleDirectory, "../../registry"),
+    path.resolve(process.cwd(), "registry")
+  ];
+
+  for (const candidate of candidates) {
+    if (existsSync(candidate)) {
+      return candidate;
+    }
+  }
+
+  throw new Error(`Unable to locate the built-in registry from ${moduleDirectory}.`);
 }

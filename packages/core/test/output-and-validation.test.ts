@@ -57,7 +57,7 @@ describe("output generation and validation", () => {
       }
     });
 
-    const directory = await mkdtemp(path.join(os.tmpdir(), "agent-composer-"));
+    const directory = await mkdtemp(path.join(os.tmpdir(), "imprint-"));
     const filePath = path.join(directory, "AGENT.md");
     await writeFile(filePath, renderAgentMarkdown(result), "utf8");
 

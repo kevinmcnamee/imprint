@@ -18,7 +18,7 @@
     "types": ["node", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
-      "@mainline/composer": ["packages/core/src/index.ts"]
+      "@imprint/core": ["packages/core/src/index.ts"]
     }
   },
   "include": [

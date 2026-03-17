@@ -1,4 +1,4 @@
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, rename, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -879,20 +879,39 @@ const traits = [
   }
 ];
 
-async function resetDirectory(directory) {
-  await rm(directory, { recursive: true, force: true });
-  await mkdir(directory, { recursive: true });
+async function removeDirectory(directory) {
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      await rm(directory, { recursive: true, force: true, maxRetries: 5, retryDelay: 50 });
+      return;
+    } catch (error) {
+      if (error?.code !== "ENOTEMPTY" || attempt === 2) {
+        throw error;
+      }
+    }
+  }
 }
 
 async function writeRegistry(rootDirectory) {
-  await resetDirectory(rootDirectory);
+  const parentDirectory = path.dirname(rootDirectory);
+  await mkdir(parentDirectory, { recursive: true });
+  const stagingDirectory = await mkdtemp(path.join(parentDirectory, ".registry-staging-"));
+
+  try {
   for (const trait of traits) {
-    const targetDirectory = path.join(rootDirectory, trait.dimension);
+      const targetDirectory = path.join(stagingDirectory, trait.dimension);
     await mkdir(targetDirectory, { recursive: true });
     const payload = YAML.stringify(trait, {
       defaultStringType: "PLAIN"
     });
     await writeFile(path.join(targetDirectory, `${trait.id}.yaml`), payload, "utf8");
+  }
+
+    await removeDirectory(rootDirectory);
+    await rename(stagingDirectory, rootDirectory);
+  } catch (error) {
+    await removeDirectory(stagingDirectory);
+    throw error;
   }
 }
 
