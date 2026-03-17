@@ -5,7 +5,7 @@ import matter from "gray-matter";
 import type { RegistryData, ValidationFinding, ValidationReport } from "../types.js";
 
 function parseMetadata(document: string): ValidationReport["metadata"] {
-  const match = document.match(/<!-- agent-composer:metadata\s*([\s\S]*?)\s*-->/);
+  const match = document.match(/<!-- [a-z-]+:metadata\s*([\s\S]*?)\s*-->/);
   if (!match) {
     return undefined;
   }
@@ -53,7 +53,7 @@ function requiredSectionsPresent(document: string): ValidationFinding[] {
 }
 
 /**
- * Validate an AGENT.md document against the composer conventions and known trait ids.
+ * Validate an AGENT.md document against Imprint conventions and known trait ids.
  */
 export async function validateAgentFile(path: string, registry?: RegistryData): Promise<ValidationReport> {
   const raw = await readFile(path, "utf8");
@@ -76,7 +76,7 @@ export async function validateAgentFile(path: string, registry?: RegistryData): 
       level: "info",
       code: "missing_metadata",
       message:
-        "No Agent Composer metadata block found. Validation fell back to section-level heuristics only."
+        "No Imprint metadata block found. Validation fell back to section-level heuristics only."
     });
   } else if (registry) {
     const knownTraitIds = new Set(registry.traits.map((trait) => trait.id));

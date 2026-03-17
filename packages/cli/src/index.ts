@@ -15,8 +15,8 @@ export function createProgram(): Command {
   const program = new Command();
 
   program
-    .name("composer")
-    .description("Compose agent identities from modular trait cards.")
+    .name("imprint")
+    .description("Build agent identities from modular trait cards with Imprint.")
     .version("0.1.0")
     .showHelpAfterError()
     .addCommand(createBuildCommand())
@@ -29,9 +29,9 @@ export function createProgram(): Command {
       "after",
       `
 Quick start:
-  composer build
-  composer browse --dimension functional
-  composer export --trait cli-engineering --trait test-first --trait plan-before-build --trait meticulous-erudite --trait structured-output --trait autonomous --name Bob --summary "CLI engineering specialist"
+  imprint build
+  imprint browse --dimension functional
+  imprint export --trait cli-engineering --trait test-first --trait plan-before-build --trait meticulous-erudite --trait structured-output --trait autonomous --name Bob --summary "CLI engineering specialist"
 `
     );
 

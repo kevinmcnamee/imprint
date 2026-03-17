@@ -3,7 +3,7 @@ import { writeFile } from "node:fs/promises";
 import { Command } from "commander";
 import ora from "ora";
 
-import { composeTraits, renderAgentMarkdown } from "@mainline/composer";
+import { composeTraits, renderAgentMarkdown } from "@imprint/core";
 
 import { runBuildWizard } from "../ui/build-wizard.js";
 import { loadActiveRegistry } from "../utils/registry.js";
@@ -28,8 +28,8 @@ export function createBuildCommand(): Command {
     "after",
     `
 Examples:
-  composer build
-  composer build --out ./agents/bob/AGENT.md
+  imprint build
+  imprint build --out ./agents/bob/AGENT.md
 `
   );
 

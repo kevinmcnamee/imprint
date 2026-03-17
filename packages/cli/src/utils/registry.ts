@@ -14,7 +14,7 @@ import {
   type RegistrySource,
   type TraitDimension,
   validateAgentFile
-} from "@mainline/composer";
+} from "@imprint/core";
 
 import { loadCliConfig } from "./config.js";
 

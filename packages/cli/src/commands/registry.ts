@@ -40,9 +40,9 @@ export function createRegistryCommand(): Command {
     "after",
     `
 Examples:
-  composer registry list
-  composer registry add ./my-traits
-  composer registry remove ./my-traits
+  imprint registry list
+  imprint registry add ./my-traits
+  imprint registry remove ./my-traits
 `
   );
 

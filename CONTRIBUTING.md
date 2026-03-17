@@ -1,6 +1,6 @@
 # Contributing
 
-Agent Composer is a public, library-first project. Contributions should improve the quality of the generated agents, the reliability of the engine, or the developer experience of integrating it.
+Imprint is a public, library-first project. Contributions should improve the quality of generated agents, the reliability of the composition engine, or the developer experience of the CLI and package APIs.
 
 ## Development
 
@@ -13,18 +13,18 @@ npm test
 
 ## Project Structure
 
-- `packages/core` contains the composition engine, registry loader, generators, and validator.
-- `packages/cli` contains the `composer` binary and command UX.
-- `registry/` contains the built-in trait cards.
-- `scripts/` contains small maintenance scripts used during development and release prep.
+- `packages/core` contains the `@imprint/core` composition engine, registry loader, generators, and validator.
+- `packages/cli` contains the `imprint` binary and command UX.
+- `registry/` contains the canonical built-in trait cards.
+- `scripts/` contains maintenance scripts used during development and release prep.
 
 ## Standards
 
 - Use TypeScript in strict mode.
-- Add TSDoc for public APIs.
+- Add or update tests for behavior changes, including built-artifact coverage when packaging behavior changes.
 - Keep trait cards concrete, opinionated, and immediately useful.
-- Add or update tests for any behavior change.
 - Preserve public, portable paths in docs and examples.
+- Smoke test the built CLI with `node packages/cli/dist/index.js --help` when touching packaging or release flow.
 
 ## Pull Requests
 

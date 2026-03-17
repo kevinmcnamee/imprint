@@ -73,29 +73,37 @@ export class RegistryManager {
   public detectCompatibilityIssues(selectedTraits: readonly TraitCard[]): readonly CompatibilityIssue[] {
     const issues: CompatibilityIssue[] = [];
 
-    for (const trait of selectedTraits) {
-      for (const [dimension, allowedIds] of Object.entries(trait.compatible_with)) {
-        if (!allowedIds?.length) {
+    for (let index = 0; index < selectedTraits.length; index += 1) {
+      const trait = selectedTraits[index];
+      if (!trait) {
+        continue;
+      }
+
+      for (let candidateIndex = index + 1; candidateIndex < selectedTraits.length; candidateIndex += 1) {
+        const candidate = selectedTraits[candidateIndex];
+        if (!candidate || candidate.dimension === trait.dimension) {
           continue;
         }
 
-        const dimensionTraits = selectedTraits.filter(
-          (candidate) => candidate.dimension === (dimension as TraitDimension)
-        );
+        const traitPreferences = trait.compatible_with[candidate.dimension];
+        const candidatePreferences = candidate.compatible_with[trait.dimension];
+        const hasExplicitPairingMetadata =
+          Boolean(traitPreferences?.length) && Boolean(candidatePreferences?.length);
 
-        for (const candidate of dimensionTraits) {
-          if (candidate.id === trait.id) {
-            continue;
-          }
+        if (!hasExplicitPairingMetadata) {
+          continue;
+        }
 
-          if (!allowedIds.includes(candidate.id)) {
-            issues.push({
-              sourceTraitId: trait.id,
-              targetTraitId: candidate.id,
-              dimension: dimension as TraitDimension,
-              message: `${trait.id} does not explicitly list ${candidate.id} as a preferred ${dimension} pairing.`
-            });
-          }
+        const traitAllowsCandidate = traitPreferences?.includes(candidate.id) ?? false;
+        const candidateAllowsTrait = candidatePreferences?.includes(trait.id) ?? false;
+
+        if (!traitAllowsCandidate && !candidateAllowsTrait) {
+          issues.push({
+            sourceTraitId: trait.id,
+            targetTraitId: candidate.id,
+            dimension: candidate.dimension,
+            message: `${trait.id} and ${candidate.id} do not explicitly prefer each other across ${trait.dimension}/${candidate.dimension}.`
+          });
         }
       }
     }

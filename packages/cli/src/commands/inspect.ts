@@ -22,8 +22,8 @@ export function createInspectCommand(): Command {
     "after",
     `
 Examples:
-  composer inspect cli-engineering
-  composer inspect evidence-graded
+  imprint inspect cli-engineering
+  imprint inspect evidence-graded
 `
   );
 

@@ -30,6 +30,7 @@ describe("composition engine", () => {
     expect(result.tools).toContain("Commander.js");
     expect(result.limitViolations).toHaveLength(0);
     expect(result.personalitySummary).toContain("Meticulous Erudite");
+    expect(result.warnings).toHaveLength(0);
   });
 
   it("blocks hard conflicts and reports soft ones", async () => {

@@ -56,8 +56,8 @@ export function createExportCommand(): Command {
     "after",
     `
 Examples:
-  composer export --trait cli-engineering --trait test-first --trait meticulous-erudite --trait structured-output --trait autonomous --name Bob --summary "CLI specialist"
-  composer export --trait deep-research --trait evidence-graded --trait curious-rigorous --trait structured-output --trait autonomous --name Frink --summary "Evidence-led researcher" --format yaml
+  imprint export --trait cli-engineering --trait test-first --trait meticulous-erudite --trait structured-output --trait autonomous --name Bob --summary "CLI specialist"
+  imprint export --trait deep-research --trait evidence-graded --trait curious-rigorous --trait structured-output --trait autonomous --name Frink --summary "Evidence-led researcher" --format yaml
 `
   );
 

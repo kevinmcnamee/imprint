@@ -6,11 +6,11 @@ function metadataBlock(result: CompositionResult): string {
   const payload = {
     agentName: result.identity.agentName,
     traitIds: result.traits.map((trait) => trait.id),
-    generatedBy: "agent-composer",
+    generatedBy: "imprint",
     version: "0.1.0"
   };
 
-  return `<!-- agent-composer:metadata\n${JSON.stringify(payload, null, 2)}\n-->`;
+  return `<!-- imprint:metadata\n${JSON.stringify(payload, null, 2)}\n-->`;
 }
 
 /**

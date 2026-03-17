@@ -6,7 +6,7 @@ export interface CliRegistryConfig {
   readonly registries: readonly string[];
 }
 
-const configDirectory = path.join(os.homedir(), ".agent-composer");
+const configDirectory = path.join(os.homedir(), ".imprint");
 const configPath = path.join(configDirectory, "config.json");
 
 async function ensureConfigDirectory(): Promise<void> {
