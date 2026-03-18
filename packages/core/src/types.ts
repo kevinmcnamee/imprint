@@ -118,6 +118,8 @@ export interface IdentityLayer {
   readonly summary: string;
   readonly quotes: readonly string[];
   readonly avatar?: string;
+  readonly skillRefs?: readonly string[];
+  readonly workflowRefs?: readonly string[];
 }
 
 /**
@@ -175,5 +177,7 @@ export interface ValidationReport {
   readonly metadata?: {
     readonly traitIds: readonly string[];
     readonly agentName?: string;
+    readonly skillRefs?: readonly string[];
+    readonly workflowRefs?: readonly string[];
   };
 }

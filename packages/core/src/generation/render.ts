@@ -6,6 +6,8 @@ function metadataBlock(result: CompositionResult): string {
   const payload = {
     agentName: result.identity.agentName,
     traitIds: result.traits.map((trait) => trait.id),
+    ...(result.identity.skillRefs?.length ? { skillRefs: result.identity.skillRefs } : {}),
+    ...(result.identity.workflowRefs?.length ? { workflowRefs: result.identity.workflowRefs } : {}),
     generatedBy: "imprint",
     version: "0.1.0"
   };
@@ -30,6 +32,12 @@ export function renderAgentMarkdown(result: CompositionResult): string {
   const limitSection = result.limitViolations.length
     ? `\n## Cardinality Notes\n\n${result.limitViolations.map((violation) => `- ${violation.message}`).join("\n")}\n`
     : "";
+  const skillRefsSection = result.identity.skillRefs?.length
+    ? `- **Skill Refs:** ${result.identity.skillRefs.map((ref) => `\`${ref}\``).join(", ")}`
+    : "";
+  const workflowRefsSection = result.identity.workflowRefs?.length
+    ? `- **Workflow Refs:** ${result.identity.workflowRefs.map((ref) => `\`${ref}\``).join(", ")}`
+    : "";
 
   return `# ${result.identity.agentName}
 
@@ -43,6 +51,8 @@ ${metadataBlock(result)}
 - **Character:** ${result.identity.characterName ?? "Original"}
 - **Voice Summary:** ${result.personalitySummary}
 ${result.identity.avatar ? `- **Avatar:** ${result.identity.avatar}` : ""}
+${skillRefsSection}
+${workflowRefsSection}
 
 ${quotesSection}
 ## Base Layer

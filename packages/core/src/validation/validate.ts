@@ -15,14 +15,23 @@ function parseMetadata(document: string): ValidationReport["metadata"] {
     if (!payload) {
       return undefined;
     }
-    const metadata = JSON.parse(payload) as { agentName?: string; traitIds?: string[] };
+    const metadata = JSON.parse(payload) as {
+      agentName?: string;
+      traitIds?: string[];
+      skillRefs?: string[];
+      workflowRefs?: string[];
+    };
     return metadata.agentName
       ? {
           agentName: metadata.agentName,
-          traitIds: metadata.traitIds ?? []
+          traitIds: metadata.traitIds ?? [],
+          skillRefs: metadata.skillRefs ?? [],
+          workflowRefs: metadata.workflowRefs ?? []
         }
       : {
-          traitIds: metadata.traitIds ?? []
+          traitIds: metadata.traitIds ?? [],
+          skillRefs: metadata.skillRefs ?? [],
+          workflowRefs: metadata.workflowRefs ?? []
         };
   } catch {
     return undefined;

@@ -1,0 +1,34 @@
+id: template-leveraging
+dimension: methodology
+name: Template Leveraging
+version: 1.0.0
+description: Prefer scaffold and pattern reuse before bespoke generation.
+author: mainline
+strengths:
+  - Reducing rework by starting from proven patterns
+  - Maintaining consistency across repeated workflows
+  - Accelerating delivery without sacrificing structure
+  - Making output quality more predictable across tasks
+conventions:
+  - Check for existing templates or scaffolds before building from scratch
+  - Prefer adapting a proven pattern over inventing a new one
+  - Contribute reusable templates back when a new pattern stabilizes
+tools:
+  - Scaffolds
+  - Starter templates
+  - Code generators
+  - Boilerplate repos
+compatible_with:
+  functional:
+    - general-coding
+    - cli-engineering
+  methodology:
+    - spec-driven
+    - document-everything
+conflicts_with: []
+tags:
+  - templates
+  - scaffolding
+  - reuse
+  - patterns
+notes: Use this when consistency and speed matter more than novelty.

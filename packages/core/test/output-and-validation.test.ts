@@ -29,13 +29,18 @@ describe("output generation and validation", () => {
       identity: {
         agentName: "Frink",
         summary: "Evidence-led researcher",
-        quotes: ["Primary sources first."]
+        quotes: ["Primary sources first."],
+        skillRefs: ["claude-code/product-verification"],
+        workflowRefs: ["research/source-comparison"]
       }
     });
 
     expect(renderAgentMarkdown(result)).toContain("## Trait Layer");
+    expect(renderAgentMarkdown(result)).toContain("`claude-code/product-verification`");
     expect(renderCompositionJson(result)).toContain("\"agentName\": \"Frink\"");
+    expect(renderCompositionJson(result)).toContain("\"skillRefs\": [");
     expect(renderCompositionYaml(result)).toContain("agentName: Frink");
+    expect(renderCompositionYaml(result)).toContain("workflowRefs:");
   });
 
   it("validates generated agent markdown against known traits", async () => {
@@ -64,5 +69,7 @@ describe("output generation and validation", () => {
     const report = await validateAgentFile(filePath, registry);
     expect(report.valid).toBe(true);
     expect(report.metadata?.traitIds).toContain("content-curation");
+    expect(report.metadata?.skillRefs).toEqual([]);
+    expect(report.metadata?.workflowRefs).toEqual([]);
   });
 });

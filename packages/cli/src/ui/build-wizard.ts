@@ -38,6 +38,12 @@ export async function runBuildWizard(
   const avatar = await input({
     message: "Avatar URL or descriptor (optional)"
   });
+  const skillRefsRaw = await input({
+    message: "Comma-separated skill refs (optional)"
+  });
+  const workflowRefsRaw = await input({
+    message: "Comma-separated workflow refs (optional)"
+  });
 
   const traitIds: string[] = [];
   for (const dimension of dimensions) {
@@ -70,6 +76,8 @@ export async function runBuildWizard(
     quotes: string[];
     characterName?: string;
     avatar?: string;
+    skillRefs?: string[];
+    workflowRefs?: string[];
   } = {
     agentName,
     summary,
@@ -87,6 +95,22 @@ export async function runBuildWizard(
   const normalizedAvatar = avatar.trim();
   if (normalizedAvatar) {
     identity.avatar = normalizedAvatar;
+  }
+
+  const skillRefs = skillRefsRaw
+    .split(",")
+    .map((ref) => ref.trim())
+    .filter(Boolean);
+  if (skillRefs.length > 0) {
+    identity.skillRefs = skillRefs;
+  }
+
+  const workflowRefs = workflowRefsRaw
+    .split(",")
+    .map((ref) => ref.trim())
+    .filter(Boolean);
+  if (workflowRefs.length > 0) {
+    identity.workflowRefs = workflowRefs;
   }
 
   return { identity, traitIds };

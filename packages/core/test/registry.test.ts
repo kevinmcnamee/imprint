@@ -9,7 +9,7 @@ const registryPath = path.resolve(process.cwd(), "registry");
 describe("registry loading", () => {
   it("loads and validates all seed traits", async () => {
     const registry = await loadRegistry([{ id: "builtin", kind: "builtin", path: registryPath }]);
-    expect(registry.traits).toHaveLength(28);
+    expect(registry.traits).toHaveLength(37);
     expect(registry.traits.every((trait) => traitCardSchema.safeParse(trait).success)).toBe(true);
   });
 
@@ -37,6 +37,6 @@ describe("registry loading", () => {
     expect(path.basename(builtRegistryPath)).toBe("registry");
 
     const registry = await loadBuiltRegistry([{ id: "builtin", kind: "builtin", path: builtRegistryPath }]);
-    expect(registry.traits).toHaveLength(28);
+    expect(registry.traits).toHaveLength(37);
   });
 });
