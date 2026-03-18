@@ -75,4 +75,31 @@ describe("composition engine", () => {
     expect(warningResult.conflicts.some((conflict) => conflict.severity === "soft")).toBe(true);
     expect(warningResult.limitViolations.some((violation) => violation.dimension === "personality")).toBe(true);
   });
+
+  it("supports identity metadata hooks without turning skills into a trait dimension", async () => {
+    const registry = await loadRegistry([{ id: "builtin", kind: "builtin", path: registryPath }]);
+    const result = composeTraits({
+      registry,
+      traitIds: [
+        "general-coding",
+        "verification-first",
+        "gotcha-aware",
+        "runbook-minded",
+        "direct-experienced",
+        "structured-output",
+        "operational-risk-aware"
+      ],
+      identity: {
+        agentName: "OpsReviewer",
+        summary: "Risk-aware engineer",
+        quotes: [],
+        skillRefs: ["claude-code/product-verification"],
+        workflowRefs: ["runbooks/predeploy-checklist"]
+      }
+    });
+
+    expect(result.identity.skillRefs).toContain("claude-code/product-verification");
+    expect(result.identity.workflowRefs).toContain("runbooks/predeploy-checklist");
+    expect(result.limitViolations).toHaveLength(0);
+  });
 });

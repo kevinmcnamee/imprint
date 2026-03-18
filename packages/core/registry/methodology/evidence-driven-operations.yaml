@@ -1,0 +1,41 @@
+id: evidence-driven-operations
+dimension: methodology
+name: Evidence Driven Operations
+version: 1.0.0
+description: Require logs, metrics, traces, or health signals before concluding
+  what happened operationally.
+author: mainline
+strengths:
+  - Reducing guesswork in operational diagnosis
+  - Grounding incident claims in observable system evidence
+  - Improving remediation quality through concrete signals
+  - Making operational decisions easier to audit after the fact
+conventions:
+  - Do not conclude an operational claim without citing a concrete signal
+  - Prefer logs, metrics, traces, and health checks over intuition
+  - State when evidence is missing or inconclusive
+  - Separate symptoms from root-cause conclusions
+tools:
+  - Logs
+  - Metrics dashboards
+  - Tracing tools
+  - Health checks
+compatible_with:
+  functional:
+    - general-coding
+    - critical-review
+    - cli-engineering
+  domain:
+    - fintech
+    - tech-industry
+  supervision:
+    - checkpoint-heavy
+    - approval-gated
+    - operational-risk-aware
+conflicts_with: []
+tags:
+  - operations
+  - evidence
+  - observability
+notes: Best for deploys, incidents, and production-adjacent work where
+  operational claims need a real evidentiary basis.

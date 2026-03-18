@@ -17,6 +17,12 @@ export function createExportCommand(): Command {
     .option("-c, --character <character>", "Character or persona name")
     .option("-q, --quote <quote>", "Quote to embed", collectValues)
     .option("-a, --avatar <avatar>", "Avatar URL or descriptor")
+    .option("--skill-ref <ref>", "External skill reference to include in identity metadata", collectValues)
+    .option(
+      "--workflow-ref <ref>",
+      "External workflow reference to include in identity metadata",
+      collectValues
+    )
     .option("-f, --format <format>", "Output format: md, json, yaml", "md")
     .option("-o, --out <path>", "Write output to a file instead of stdout")
     .action(
@@ -27,6 +33,8 @@ export function createExportCommand(): Command {
         character?: string;
         quote?: string[];
         avatar?: string;
+        skillRef?: string[];
+        workflowRef?: string[];
         format: "md" | "json" | "yaml";
         out?: string;
       }) => {
@@ -38,7 +46,9 @@ export function createExportCommand(): Command {
         const result = await composeFromTraitIds(options.trait, {
           ...identity,
           ...(options.character ? { characterName: options.character } : {}),
-          ...(options.avatar ? { avatar: options.avatar } : {})
+          ...(options.avatar ? { avatar: options.avatar } : {}),
+          ...(options.skillRef?.length ? { skillRefs: options.skillRef } : {}),
+          ...(options.workflowRef?.length ? { workflowRefs: options.workflowRef } : {})
         });
         const rendered = renderByFormat(result, options.format);
 
@@ -58,6 +68,7 @@ export function createExportCommand(): Command {
 Examples:
   imprint export --trait cli-engineering --trait test-first --trait meticulous-erudite --trait structured-output --trait autonomous --name Bob --summary "CLI specialist"
   imprint export --trait deep-research --trait evidence-graded --trait curious-rigorous --trait structured-output --trait autonomous --name Frink --summary "Evidence-led researcher" --format yaml
+  imprint export --trait general-coding --trait verification-first --trait meticulous-erudite --trait structured-output --trait operational-risk-aware --name OpsReviewer --summary "Risk-aware engineer" --skill-ref claude-code/product-verification --workflow-ref runbooks/predeploy-checklist
 `
   );
 
