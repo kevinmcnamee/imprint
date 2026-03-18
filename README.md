@@ -4,9 +4,14 @@
 
 _Every agent needs an imprint._
 
-Imprint is an open-source composition system for building durable `AGENT.md` files from reusable trait cards instead of rewriting agent instructions from scratch. It combines a shared base layer, a curated trait registry, and an identity layer so teams can generate consistent agent specs, inspect the cards behind them, validate generated output, and extend the registry with their own traits.
+Imprint is a native CLI for composing durable identity files for AI agents. Instead of hand-writing `AGENTS.md`, `CLAUDE.md`, `SOUL.md`, and other runtime-specific files from scratch, you assemble them from reusable trait cards with a shared base layer, a curated registry, and a lightweight identity brief.
 
-Imprint is intentionally identity-first:
+Imprint is intentionally CLI-native and agent-first:
+- It is built for real agent runtimes, not chatbot demos.
+- It generates files that agents actually consume in tools like OpenClaw, Claude Code, Codex, Gemini CLI, and OpenCode.
+- The web UI is a visual companion to the same composition engine, not a separate product with different logic.
+
+Imprint is also intentionally identity-first:
 - Imprint defines who the agent is: its standards, judgment style, supervision posture, communication shape, and durable role composition.
 - Skills and workflows define what the agent does: deploy flows, runbooks, verification packs, scaffolds, and other procedural modules.
 - Skills are an orthogonal execution layer, not a replacement for identity. The same skill can be attached to different identities and should behave differently because the identity modulates risk tolerance, reporting style, and escalation behavior.
@@ -20,6 +25,15 @@ npx imprint build
 ```
 
 The interactive wizard loads the built-in registry, walks through trait selection across all seven dimensions, and writes a composed `AGENT.md`. It can also optionally annotate the generated identity with external `skillRefs` and `workflowRefs` when you want to point at procedural modules without collapsing them into trait cards.
+
+Imprint is strongest when you treat it like infrastructure, not copywriting help. The goal is to produce agent files that can be dropped directly into the runtime where the work happens.
+
+Common outputs include:
+
+- `AGENTS.md` for Codex and compatible agents
+- `CLAUDE.md` for Claude Code
+- `SOUL.md` / `AGENTS.md` for OpenClaw-style stacks
+- `.opencode/agents/<name>.md` for OpenCode
 
 You can also export non-interactively:
 
@@ -76,7 +90,7 @@ imprint validate ./AGENT.md
 
 ### `imprint export`
 
-Export a composed identity as markdown, JSON, or YAML.
+Export a composed identity as markdown, JSON, or YAML. This is the fastest path when you already know the traits and want a runtime-ready file without opening the interactive wizard.
 
 ```bash
 imprint export \
@@ -99,6 +113,16 @@ imprint registry list
 imprint registry add ./my-traits
 imprint registry remove ./my-traits
 ```
+
+## Why CLI-native matters
+
+Most agent tooling stops at a web form or a prompt generator. Imprint starts where the agent actually runs.
+
+1. Compose once in the CLI.
+2. Export the format your runtime expects.
+3. Commit the file to the repo or agent environment that will use it.
+
+That keeps the identity close to the code, version-controlled, inspectable, and easy to evolve alongside the rest of the system.
 
 ## Identity vs Skills
 
