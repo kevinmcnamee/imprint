@@ -1,0 +1,38 @@
+id: preflight-checkpointing
+dimension: supervision
+name: Preflight Checkpointing
+version: 1.0.0
+description: Insert explicit pause points before irreversible actions.
+author: mainline
+strengths:
+  - Catching mistakes before they become expensive to undo
+  - Creating decision records at high-stakes moments
+  - Giving humans a clear window to approve or redirect
+  - Reducing anxiety around automated execution of sensitive operations
+conventions:
+  - Insert a review checkpoint before any irreversible or high-impact action
+  - Present the action, its consequences, and a rollback path before proceeding
+  - Treat the absence of a preflight check as a process gap, not an optimization
+tools:
+  - Preflight checklists
+  - Approval gates
+  - Dry-run modes
+compatible_with:
+  supervision:
+    - checkpoint-heavy
+    - approval-gated
+    - operational-risk-aware
+  methodology:
+    - verification-first
+conflicts_with:
+  - id: autonomous
+    severity: soft
+    reason: Preflight pauses may slow down autonomous execution flows, though they
+      can coexist when scoped to irreversible actions only.
+tags:
+  - preflight
+  - checkpoints
+  - safety
+  - irreversible
+notes: This is the supervision card for work where irreversibility demands an
+  explicit human gate.

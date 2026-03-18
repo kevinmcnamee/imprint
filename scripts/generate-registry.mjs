@@ -615,6 +615,49 @@ const traits = [
     notes: "Best for deploys, incidents, and production-adjacent work where operational claims need a real evidentiary basis."
   },
   {
+    id: "template-leveraging",
+    dimension: "methodology",
+    name: "Template Leveraging",
+    version: "1.0.0",
+    description: "Prefer scaffold and pattern reuse before bespoke generation.",
+    author: "mainline",
+    strengths: [
+      "Reducing rework by starting from proven patterns",
+      "Maintaining consistency across repeated workflows",
+      "Accelerating delivery without sacrificing structure",
+      "Making output quality more predictable across tasks"
+    ],
+    conventions: [
+      "Check for existing templates or scaffolds before building from scratch",
+      "Prefer adapting a proven pattern over inventing a new one",
+      "Contribute reusable templates back when a new pattern stabilizes"
+    ],
+    tools: [
+      "Scaffolds",
+      "Starter templates",
+      "Code generators",
+      "Boilerplate repos"
+    ],
+    compatible_with: {
+      functional: [
+        "general-coding",
+        "cli-engineering"
+      ],
+      methodology: [
+        "spec-driven",
+        "document-everything"
+      ]
+    },
+    conflicts_with: [],
+    tags: [
+      "templates",
+      "scaffolding",
+      "reuse",
+      "patterns"
+    ],
+    notes: "Use this when consistency and speed matter more than novelty."
+  },
+  {
     id: "meticulous-erudite",
     dimension: "personality",
     name: "Meticulous Erudite",
@@ -1000,6 +1043,54 @@ const traits = [
     ],
     tags: ["supervision", "approval", "control"],
     notes: "Choose this when the environment demands explicit human authorization before meaningful execution proceeds."
+  },
+  {
+    id: "preflight-checkpointing",
+    dimension: "supervision",
+    name: "Preflight Checkpointing",
+    version: "1.0.0",
+    description: "Insert explicit pause points before irreversible actions.",
+    author: "mainline",
+    strengths: [
+      "Catching mistakes before they become expensive to undo",
+      "Creating decision records at high-stakes moments",
+      "Giving humans a clear window to approve or redirect",
+      "Reducing anxiety around automated execution of sensitive operations"
+    ],
+    conventions: [
+      "Insert a review checkpoint before any irreversible or high-impact action",
+      "Present the action, its consequences, and a rollback path before proceeding",
+      "Treat the absence of a preflight check as a process gap, not an optimization"
+    ],
+    tools: [
+      "Preflight checklists",
+      "Approval gates",
+      "Dry-run modes"
+    ],
+    compatible_with: {
+      supervision: [
+        "checkpoint-heavy",
+        "approval-gated",
+        "operational-risk-aware"
+      ],
+      methodology: [
+        "verification-first"
+      ]
+    },
+    conflicts_with: [
+      {
+        id: "autonomous",
+        severity: "soft",
+        reason: "Preflight pauses may slow down autonomous execution flows, though they can coexist when scoped to irreversible actions only."
+      }
+    ],
+    tags: [
+      "preflight",
+      "checkpoints",
+      "safety",
+      "irreversible"
+    ],
+    notes: "This is the supervision card for work where irreversibility demands an explicit human gate."
   },
   {
     id: "typescript-cli",

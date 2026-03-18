@@ -175,14 +175,14 @@ Field summary:
 
 ## Built-In Traits
 
-Imprint ships with 35 built-in traits across 7 dimensions:
+Imprint ships with 37 built-in traits across 7 dimensions:
 
 - Communication: 3
 - Domain: 3
 - Functional: 5
-- Methodology: 12
+- Methodology: 13
 - Personality: 5
-- Supervision: 4
+- Supervision: 5
 - Toolkit: 3
 
 The seed registry focuses on practical, behaviorally concrete cards such as `verification-first`, `gotcha-aware`, `runbook-minded`, `adversarial-quality-bar`, `evidence-driven-operations`, `operational-risk-aware`, `incident-structured-reporting`, `cli-engineering`, `critical-review`, and `autonomous`.
