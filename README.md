@@ -211,6 +211,10 @@ Imprint ships with 37 built-in traits across 7 dimensions:
 
 The seed registry focuses on practical, behaviorally concrete cards such as `verification-first`, `gotcha-aware`, `runbook-minded`, `adversarial-quality-bar`, `evidence-driven-operations`, `operational-risk-aware`, `incident-structured-reporting`, `cli-engineering`, `critical-review`, and `autonomous`.
 
+## Release Management
+
+Release and package management instructions live in [RELEASE.md](./RELEASE.md).
+
 ## Packages
 
 ```text
